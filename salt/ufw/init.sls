@@ -1,6 +1,11 @@
 ufw:
   pkg.installed
 
+ufw.service:
+  service.running:
+    - cmd.run: 'ufw enable'
+    - unless: 'ufw enable | grep active'
+
 'ufw enable':
   cmd.run:
     - unless: "ufw status verbose |grep 'Status: active'"
