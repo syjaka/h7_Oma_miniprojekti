@@ -20,7 +20,7 @@ TSCRIPT
 
 $tscript_github = <<TSCRIPT
 set -o verbose
-git config --global user.email "kadriye.syrja@myy.haaga-helia.fi
+git config --global user.email "kadriye.syrja@myy.haaga-helia.fi"
 git config --global user.name "saltmaster"
 echo "Git config done"
 TSCRIPT
