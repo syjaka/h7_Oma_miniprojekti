@@ -1,7 +1,6 @@
 base:
   '*':
     - ufw
-    - restart
     - user
 
   'webadmin':
