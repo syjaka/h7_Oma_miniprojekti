@@ -3,6 +3,6 @@ restart_minion_service:
     - name: salt-minion
     - enable: True
     - onchanges:
-        - cmd: ufw
+        - cmd: enable_ufw
     - require:
-        - cmd: ufw
+        - cmd: ufw.service

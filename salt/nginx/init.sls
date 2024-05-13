@@ -10,9 +10,7 @@ nginx:
 
 /etc/nginx/sites-enabled/testi.com:
   file.symlink:
-    - target: "/etc/nginx/sites-enabled/testi.com"
-    - require:
-      - file: /etc/nginx/sites-available/testi.com
+    - target: "../sites-available/testi.com"
  
 /home/vagrant/nginx:
    file.directory:
@@ -31,6 +29,10 @@ nginx:
      - source: "salt://nginx/tmp/index.html"
      - group: webserver
      - mode: 664
+
+/etc/hosts:
+       file.managed:
+         - source: "salt://nginx/tmp/hosts"
 
 nginx.service:
   service.running:
