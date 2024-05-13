@@ -7,4 +7,5 @@ base:
     - usrApps
 
   'webserver':
+    - serverApps
     - nginx  
