@@ -25,6 +25,3 @@ ufw.service:
 'ufw allow 4506/tcp':
   cmd.run:
     - unless: "ufw status verbose |grep '^4506/tcp' "
-
-ufw.service:
-  service.running
