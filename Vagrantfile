@@ -67,6 +67,7 @@ Vagrant.configure("2") do |config|
 	     webadmin.vm.hostname = "webadmin"
 	     webadmin.vm.network "private_network", ip: "192.168.88.102"
 	     webadmin.vm.provision "shell", inline: $tscript_webadmin
+	     webadmin.vm.provision "shell", inline: $tscript_ufw
 	     webadmin.vm.provider "virtualbox" do |vb|
 		vb.gui = true
 		vb.memory = "2048"
@@ -77,6 +78,7 @@ Vagrant.configure("2") do |config|
 	      webserver.vm.hostname = "webserver"
 	      webserver.vm.network "private_network", ip: "192.168.88.103"
 	      webserver.vm.provision "shell", inline: $tscript_webserver
+	      webserver.vm.provision "shell", inline: $tscript_ufw
 			 webserver.vm.provider "virtualbox" do |vb|
 		 vb.gui = false
 		 vb.memory = "1024"
