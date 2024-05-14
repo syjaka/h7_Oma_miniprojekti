@@ -7,6 +7,8 @@ Projektini tavoitteena oli luoda yksityinen ympäristö käyttäen Salttia. Ymp�
 
 Moduulin lisenssi: [GNU General Public License v3.0](https://github.com/syjaka/h7_Oma_miniprojekti/tree/main#)
 
+Tekijä Kadi Syrjä
+
 ---
 
 ## Kuvaus
