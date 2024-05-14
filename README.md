@@ -1,22 +1,33 @@
-# Kesken
+
 # h7_Oma_miniprojekti
-h7_Oma_miniprojekti
 
-## Tarkoitus sekä kuvaus
+## Tarkoitus 
 
-Projektini tavoitteena oli rakentaa yksityinen ympäristö käyttäen SaltStack-konfiguraatiohallintatyökalua. Verkossa on keskeisenä toimintona web-palvelin, joka hostaa verkkosivuja. Lisäksi verkossa on webadmin-käyttäjä, jolla on tavallisten käyttöoikeuksien lisäksi juuluu webserver-ryhmään jolla on oikeus hallinnoida webserverillä sijaitsevaa public_html hakemistoa ja sen sisältöä. 
+Projektini tavoitteena oli luoda yksityinen ympäristö käyttäen Salttia. Verkossa on keskeisenä toimintona web-palvelin, joka hostaa verkkosivuja. Lisäksi verkossa on webadmin-käyttäjä, joka on tavallisten käyttöoikeuksien lisäksi kuuluu webserver-ryhmään. Ryhmällä on oikeus hallinnoida webserverillä sijaitsevaa public_html hakemistoa ja sen sisältöä. 
 
-Verkkosivut luodaan ja hostataan nginx:llä ja webserverille luodaan public_html hakemisto josta sivut vastaavat. Tänne sijoitetaan alustava sivusto index.html tiedostoon ja se vastaa sekä `curl localhost` sekä `curl testi.com` kutsuun samooin kuin toiselta koneelta suoritettuun `curl http://192.168.88.103` kutsuun.
+Moduulin lisenssi: [GNU General Public License v3.0](https://github.com/syjaka/h7_Oma_miniprojekti/tree/main#)
 
-Projektiin kuuluu kolmen eri käyttäjätason luominen: admin-käyttäjä, joka suorittaa ylläpitotehtäviä ilman root-oikeuksia, webadmin jolla on muokkausoikeudet webserverin verkkosivujen sisältöön sekä tavallinen käyttäjä, jonka avulla voidaan testata järjestelmän toimintaa käyttäjän näkökulmasta. 
+---
 
-Projektin ulkopuolelle on jäänyt shh yhteyksien konfigurointi siten että webadmin voisi omalta koneeltaan ottaa yhteyden webserveriin sivujen muokkausta varten. Lisäksi **salt**-hakemistossa löytyvät ufw sekä restart_admin tilat eivät tuottaneet toivottua lopputulosta. Ufw'n asennuksen jälkeen yhteys minioneihin katkesi välittömästi, enkä saanut sitä palautettua kuin manuaalisti minionilta. Jätän ne kuitenkin tähän jatkojalostusta silmällä pitäen. Nyt ratkaisin asian määrittämällä ufwn asennettavaksi jo koneiden luonnin yhteydessä.
+## Kuvaus
+
+Suoritettava moduuli sisältää seuraavat tilat:
+1. nginx - asentaa ja konfiguroi Nginx:än vastaamaan verkkosivujen kutsuun. Lisäksi se luo webserverille public_html hakemiston sisältöineen johon webserver ryhmään kuuluvilla on hallinta ja muokkausoikeudet.
+2. serverApps - ajaa webserverille hyödyllisiä ohjelmia.
+3. user luo kolmen eri käyttäjätason käyttäjät sekä webserver käyttäjäryhmän. Admin voi hallinnoida koneita sudo-oikeuksin. Webadmin ja basic ovat tavallisia käyttäjiä, mutta webadmin liitetään webserver käyttäjäryhmään jolloin sillä on oikeus hallinnoida verkkosivuja.
+4. usrApps asentaa webadmin koneeseen hyödylliset ohjelmat.
+5. topfile joka ajaa ym tilat.
+
+Jatkoa ajatellen seikkoja jotka jäivät projektin ulkopuolelle ajan loppuessa:
+1. ufw tilan käyttöönotto koska se ei nyt onnistunut (salt hakemistossa myös ufv ja minion_restart tilat tähän liittyen)
+2. shh yhteyksien konfigurointi siten että webadmin saa yhteyden suoraan koneeltaan webserveriin
+3. rootin lukitseminen kaikilta koneilta.
 
 ---
 
 ## Vaatimukset
 
-Projekti on toteutettunkokonaisuudessan vagrantilla luoduilla virtuaalikoneella. Näin ollen koneeella tulee olla vagrant asennettuna.
+Projekti on toteutettu kokonaisuudessan vagrantilla luoduilla virtuaalikoneella. Näin ollen koneella tulee olla vagrant asennettuna.
 Mikäli käytät oheista vagrantfileä virtuaalikoneiden luontiin, asentaa se muut tarvittavat lisäosat.
 
 Mikäli testaat tätä muussa ympäristössä tulee käytössä olla kolme virtuaalikonetta. Salt-master ja 2 x salt minion ja nämä tulee myös ola asennettu ja konfiguroitu toimintaan. Lisäksi webadmin tarvitsee työpöydän, nettisivujen testaamiseen selaimella.
@@ -28,18 +39,112 @@ Mikäli testaat tätä muussa ympäristössä tulee käytössä olla kolme virtu
 
 ### Ohjeet:
 
-- Mikäli käytät vagrantfileä koneiden luomiseen korjaa gitin confic-komentoihin oma nimesi ja meilisi. Testatessa moduulien luomista työpöytä ei aina automaattisesti käynnistynyt. Mikäli näin käy nollaa ensin salasana webadmin terminaalissa `sudo passwd vagrant`, jonka jälkeen kirjaudu guihin. Siellä potkase työpöytä käuntiin `startxfce4`.
+- Mikäli käytät vagrantfileä koneiden luomiseen korjaa tarvittaessa gitin confic-komentoihin oma nimesi ja meilisi. Testatessa moduulien luomista työpöytä ei aina automaattisesti käynnistynyt. Lisäksi työpöydälle ei voi kirjautua nollaamatta salasanaa. Itse nollasin salasanan webadmin terminaalissa `sudo passwd vagrant`, jonka jälkeen kirjauduin guihin. Siellä potkase työpöytä käyntiin `startxfce4`.
+    <details>
+    <summary>Vagrantfile tästä</summary>
+      
+      # -*- mode: ruby -*-
+      # vi: set ft=ruby :
+      
+      
+      $tscript_master = <<TSCRIPT
+      set -o verbose
+      apt-get update
+      apt-get -y install ufw curl micro bash-completion git ssh salt-master
+      sudo systemctl restart salt-master
+      echo "Master done"
+      TSCRIPT
+      
+      $tscript_ufw = <<TSCRIPT
+      ufw allow 22/tcp
+      ufw allow 80/tcp
+      ufw allow 4505/tcp
+      ufw allow 4506/tcp
+      echo "y" | ufw enable
+      echo "Ufw config done and enabled"
+      TSCRIPT
+      
+      $tscript_github = <<TSCRIPT
+      set -o verbose
+      git config --global user.email "kadriye.syrja@myy.haaga-helia.fi"
+      git config --global user.name "saltmaster"
+      echo "Git config done"
+      TSCRIPT
+      
+      $tscript_webadmin = <<TSCRIPT
+      set -o verbose
+      apt-get update
+      apt-get -y install salt-minion tasksel
+      echo "master: 192.168.88.101" > /etc/salt/minion
+      echo "id: webadmin" >> /etc/salt/minion
+      echo "master_alive_interval: 30" >> /etc/salt/minion
+      sudo systemctl restart salt-minion
+      #install XFCE
+      sudo tasksel install xfce-desktop
+      echo "Webadmin done"
+      TSCRIPT
+      
+      $tscript_webserver = <<TSCRIPT
+      set -o verbose
+      apt-get update
+      apt-get -y install salt-minion
+      echo "master: 192.168.88.101" > /etc/salt/minion
+      echo "id: webserver" >> /etc/salt/minion
+      echo "master_alive_interval: 30" >> /etc/salt/minion
+      sudo systemctl restart salt-minion
+      echo "Webserver done"
+      TSCRIPT
+      
+      Vagrant.configure("2") do |config|
+      	config.vm.synced_folder ".", "/vagrant", disabled: true
+      	config.vm.synced_folder "shared/", "/home/vagrant/shared", create: true
+      	config.vm.box = "debian/bullseye64"
+      	
+      	config.vm.define "saltmaster" do |saltmaster|
+      		saltmaster.vm.hostname = "saltmaster"
+      		saltmaster.vm.network "private_network", ip: "192.168.88.101"
+      		saltmaster.vm.provision "shell", inline: $tscript_master
+      		saltmaster.vm.provision "shell", inline: $tscript_ufw
+      		saltmaster.vm.provision "shell", inline: $tscript_github
+      	end
+      	
+      	config.vm.define "webadmin", primary: true do |webadmin|
+      	     webadmin.vm.hostname = "webadmin"
+      	     webadmin.vm.network "private_network", ip: "192.168.88.102"
+      	     webadmin.vm.provision "shell", inline: $tscript_ufw
+      	     webadmin.vm.provision "shell", inline: $tscript_webadmin
+      	     webadmin.vm.provider "virtualbox" do |vb|
+      		vb.gui = true
+      		vb.memory = "2048"
+      	     end	
+      	end
+      	
+      	config.vm.define "webserver", primary: true do |webserver|
+      	      webserver.vm.hostname = "webserver"
+      	      webserver.vm.network "private_network", ip: "192.168.88.103"
+      	      webserver.vm.provision "shell", inline: $tscript_ufw
+      	      webserver.vm.provision "shell", inline: $tscript_webserver
+      			 webserver.vm.provider "virtualbox" do |vb|
+      		 vb.gui = false
+      		 vb.memory = "1024"
+      	      end
+      	end
+      
+      end
+    </details>  
 
-1. Testaa ensin että minionit kuuntelevat masteria `sudo salt-key`
-2. Hyväksi avaimet `sudo salt-key -A`
-3. Kopioi tämän repon salt-hakemisto masterin /srv hakemistoon ja siirry kopioituun hakemistoon.
-4. Suorita `sudo salt '*' state.apply`.
-5. Testaa verkkosivujen muokkausta webadminina `su webadmin`ja anna salasana `User One`.
 
-Webserverin hakemistorakenne verkkosivuille.
-:vag
+1. Hyväksy avaimet `sudo salt-key -A`.
+2. Kopioi tämän repon salt-hakemisto masterin /srv hakemistoon ja siirry kopioituun hakemistoon.
+3. Suorita `sudo salt '*' state.apply`.
+    - Lopputuloksena onnistunut suoritus:
+    - !o7-001
+    - !o7-002
+7. Testaa verkkosivujen muokkausta webadminina `su webadmin`ja anna salasana `User One`.
+
+!h7-004
 
 # Lähteet:
-https://serverfault.com/questions/424452/nginx-enable-site-command 
-https://gist.github.com/xameeramir/a5cb675fb6a6a64098365e89a239541d
-curl localhost error https://stackoverflow.com/questions/22952676/curl-failed-to-connect-to-localhost-port-80
+
+Karvinen, T. 2024. Infra as Code - Palvelinten hallinta 2024. Luettavissa:https://terokarvinen.com/2024/configuration-management-2024-spring/. Luettu: 14.5.2024.
+
