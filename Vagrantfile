@@ -42,7 +42,7 @@ TSCRIPT
 $tscript_webserver = <<TSCRIPT
 set -o verbose
 apt-get update
-apt-get -y install salt-minion curl
+apt-get -y install salt-minion
 echo "master: 192.168.88.101" > /etc/salt/minion
 echo "id: webserver" >> /etc/salt/minion
 echo "master_alive_interval: 30" >> /etc/salt/minion
