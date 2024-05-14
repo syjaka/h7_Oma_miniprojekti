@@ -3,7 +3,7 @@
 
 ## Tarkoitus 
 
-Projektini tavoitteena oli luoda yksityinen ympäristö käyttäen Salttia. Verkossa on keskeisenä toimintona web-palvelin, joka hostaa verkkosivuja. Lisäksi verkossa on webadmin-käyttäjä, joka on tavallisten käyttöoikeuksien lisäksi kuuluu webserver-ryhmään. Ryhmällä on oikeus hallinnoida webserverillä sijaitsevaa public_html hakemistoa ja sen sisältöä. 
+Projektini tavoitteena oli luoda yksityinen ympäristö käyttäen Salttia. Ympäristössä on keskeisenä toimintona web-palvelin, joka hostaa verkkosivuja. Lisäksi verkossa on webadmin-käyttäjä, joka on tavallisten käyttöoikeuksien lisäksi kuuluu webserver-ryhmään. Ryhmällä on oikeus hallinnoida webserverillä sijaitsevaa public_html hakemistoa ja sen sisältöä. 
 
 Moduulin lisenssi: [GNU General Public License v3.0](https://github.com/syjaka/h7_Oma_miniprojekti/tree/main#)
 
@@ -12,16 +12,16 @@ Moduulin lisenssi: [GNU General Public License v3.0](https://github.com/syjaka/h
 ## Kuvaus
 
 Suoritettava moduuli sisältää seuraavat tilat:
-1. nginx - asentaa ja konfiguroi Nginx:än vastaamaan verkkosivujen kutsuun. Lisäksi se luo webserverille public_html hakemiston sisältöineen johon webserver ryhmään kuuluvilla on hallinta ja muokkausoikeudet.
-2. serverApps - ajaa webserverille hyödyllisiä ohjelmia.
-3. user luo kolmen eri käyttäjätason käyttäjät sekä webserver käyttäjäryhmän. Admin voi hallinnoida koneita sudo-oikeuksin. Webadmin ja basic ovat tavallisia käyttäjiä, mutta webadmin liitetään webserver käyttäjäryhmään jolloin sillä on oikeus hallinnoida verkkosivuja.
-4. usrApps asentaa webadmin koneeseen hyödylliset ohjelmat.
-5. topfile joka ajaa ym tilat.
+1. **nginx** - asentaa ja konfiguroi Nginx:än vastaamaan verkkosivujen kutsuun. Lisäksi se luo webserverille public_html hakemiston sisältöineen johon webserver ryhmään kuuluvilla on hallinta ja muokkausoikeudet.
+2. **serverApps** - ajaa webserverille hyödyllisiä ohjelmia.
+3. **user** luo kolmen eri käyttäjätason käyttäjät sekä webserver käyttäjäryhmän. Admin voi hallinnoida koneita sudo-oikeuksin. Webadmin ja basic ovat tavallisia käyttäjiä, mutta webadmin liitetään webserver käyttäjäryhmään jolloin sillä on oikeus hallinnoida verkkosivuja.
+4. **usrApps** asentaa webadmin koneeseen hyödylliset ohjelmat.
+5. **topfile** joka ajaa ym tilat.
 
 Jatkoa ajatellen seikkoja jotka jäivät projektin ulkopuolelle ajan loppuessa:
-1. ufw tilan käyttöönotto koska se ei nyt onnistunut (salt hakemistossa myös ufv ja minion_restart tilat tähän liittyen)
+1. **ufw** tilan käyttöönotto koska se ei nyt onnistunut (salt hakemistossa myös ufv ja minion_restart tilat tähän liittyen)
 2. shh yhteyksien konfigurointi siten että webadmin saa yhteyden suoraan koneeltaan webserveriin
-3. rootin lukitseminen kaikilta koneilta.
+3. rootin salasanakirjautumisen lukitseminen kaikilta koneilta.
 
 ---
 
@@ -138,11 +138,11 @@ Mikäli testaat tätä muussa ympäristössä tulee käytössä olla kolme virtu
 2. Kopioi tämän repon salt-hakemisto masterin /srv hakemistoon ja siirry kopioituun hakemistoon.
 3. Suorita `sudo salt '*' state.apply`.
     - Lopputuloksena onnistunut suoritus:
-    - !o7-001
-    - !o7-002
+      ![o7-001](https://github.com/syjaka/h7_Oma_miniprojekti/commit/e481b7bbfb8f842c4143d8916ef9a1415fdef13e#diff-78e5defca38016670b704716b12e576010e7e75cee52966221700fe7a270a65b)
+      ![o7-002](https://github.com/syjaka/h7_Oma_miniprojekti/commit/e481b7bbfb8f842c4143d8916ef9a1415fdef13e#diff-2642f081306ff05905dbe3ba45b191380e206913fde1e8ccd76464a31f43d253)
 7. Testaa verkkosivujen muokkausta webadminina `su webadmin`ja anna salasana `User One`.
 
-!h7-004
+![h7-004](https://github.com/syjaka/h7_Oma_miniprojekti/commit/e481b7bbfb8f842c4143d8916ef9a1415fdef13e#diff-0d9bd0e4370c0c46179d7d15020b9c17b1555aedb1a0318be7a6becbfeb84c30)
 
 # Lähteet:
 
