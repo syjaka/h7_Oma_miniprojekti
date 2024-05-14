@@ -138,13 +138,15 @@ Mikäli testaat tätä muussa ympäristössä tulee käytössä olla kolme virtu
 2. Kopioi tämän repon salt-hakemisto masterin /srv hakemistoon ja siirry kopioituun hakemistoon.
 3. Suorita `sudo salt '*' state.apply`.
     - Lopputuloksena onnistunut suoritus:
-      ![o7-001](https://github.com/syjaka/h7_Oma_miniprojekti/commit/e481b7bbfb8f842c4143d8916ef9a1415fdef13e#diff-78e5defca38016670b704716b12e576010e7e75cee52966221700fe7a270a65b)
-      ![o7-002](https://github.com/syjaka/h7_Oma_miniprojekti/commit/e481b7bbfb8f842c4143d8916ef9a1415fdef13e#diff-2642f081306ff05905dbe3ba45b191380e206913fde1e8ccd76464a31f43d253)
+      ![o7-001](https://github.com/syjaka/h7_Oma_miniprojekti/assets/123550796/1ff3b2de-fce3-4328-bc98-ab20e716f6e9)
+      ![o7-002](https://github.com/syjaka/h7_Oma_miniprojekti/assets/123550796/345c521e-9db5-4ebb-a8b8-b13dd4eb4fcd)
+
 7. Testaa verkkosivujen muokkausta webadminina `su webadmin`ja anna salasana `User One`.
+![!h7-004](https://github.com/syjaka/h7_Oma_miniprojekti/assets/123550796/34d8e0e7-db57-47bf-95c4-fd288c405549)
 
-![h7-004](https://github.com/syjaka/h7_Oma_miniprojekti/commit/e481b7bbfb8f842c4143d8916ef9a1415fdef13e#diff-0d9bd0e4370c0c46179d7d15020b9c17b1555aedb1a0318be7a6becbfeb84c30)
 
-# Lähteet:
+
+### Lähteet:
 
 Karvinen, T. 2024. Infra as Code - Palvelinten hallinta 2024. Luettavissa:https://terokarvinen.com/2024/configuration-management-2024-spring/. Luettu: 14.5.2024.
 
