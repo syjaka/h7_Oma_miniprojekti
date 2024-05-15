@@ -151,4 +151,8 @@ Mikäli testaat tätä muussa ympäristössä tulee käytössä olla kolme virtu
 ### Lähteet:
 
 Karvinen, T. 2024. Infra as Code - Palvelinten hallinta 2024. Luettavissa:https://terokarvinen.com/2024/configuration-management-2024-spring/. Luettu: 14.5.2024.
+Lisäys puuttuviin lähteisiin 15.05.2024:
+McDonald S. Summary: Setting up a Debian Vagrant box on Windows 10 with VirtualBox, 2018. Luettavissa: https://shanemcd.org/tag/vagrant/. Luettu 12.05.2024.
+Nginx enable site command, 2021. Luettavissa: https://serverfault.com/questions/424452/nginx-enable-site-command. Luettu 12.05.2024.
+
 
