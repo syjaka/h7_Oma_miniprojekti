@@ -146,7 +146,13 @@ Mikäli testaat tätä muussa ympäristössä tulee käytössä olla kolme virtu
 7. Testaa verkkosivujen muokkausta webadminina `su webadmin`ja anna salasana `User One`.
 ![!h7-004](https://github.com/syjaka/h7_Oma_miniprojekti/assets/123550796/34d8e0e7-db57-47bf-95c4-fd288c405549)
 
+---
+15.5.2024 Lisätty linkki moduulin testivideoon
 
+Video tilan suorituksesta lopputuloksen kanssa:
+[![Kaltura video](https://github.com/syjaka/Palvelinten-Hallinta-2024/blob/main/images/0_gaijn6j9_0_2nuawi2b.jpg)](https://api.kaltura.nordu.net/p/288/sp/28800/embedIframeJs/uiconf_id/23448708/partner_id/288?iframeembed=true&playerId=kaltura_player&entry_id=0_gaijn6j9&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=0_llro2er8)
+
+---
 
 ### Lähteet:
 
