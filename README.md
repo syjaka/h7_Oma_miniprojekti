@@ -1,7 +1,9 @@
 
-# h7_Oma_miniprojekti
+# Oma miniprojekti
 
-## Tarkoitus 
+Palvelinten hallinta (Karvinen 2024) kursson miniprojekti. Tässä esitelty projektin lopputulos. Varsinainen raportti projektista toteutusvaiheineen löytyy täältä[h7_Oma_miniprojekti.md](h7_Oma_miniprojekti.md)
+
+### Tarkoitus 
 
 Projektini tavoitteena oli luoda yksityinen ympäristö käyttäen Salttia. Ympäristössä on keskeisenä toimintona web-palvelin, joka hostaa verkkosivuja. Lisäksi verkossa on webadmin-käyttäjä, joka on tavallisten käyttöoikeuksien lisäksi kuuluu webserver-ryhmään. Ryhmällä on oikeus hallinnoida webserverillä sijaitsevaa public_html hakemistoa ja sen sisältöä. 
 
